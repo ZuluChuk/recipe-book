@@ -2,12 +2,16 @@ import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 import {ShoppingListComponent} from './shopping-list/shopping-list.component';
 import {RecipesComponent} from './recipes/recipes.component';
-import {AppModule} from './app.module';
+import {RecipeStartComponent} from './recipes/recipe-start/recipe-start.component';
+import {RecipeDetailComponent} from './recipes/recipe-detail/recipe-detail.component';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/recipes'},
+  { path: '', redirectTo: '/recipes', pathMatch: 'full'},
   { path: 'shopping-list', component: ShoppingListComponent},
-  { path: 'recipes', component: RecipesComponent}
+  { path: 'recipes', component: RecipesComponent, children:[
+      {path: '', component: RecipeStartComponent},
+      {path: ':id', component: RecipeDetailComponent}
+    ]}
 ];
 
 @NgModule(
@@ -21,6 +25,6 @@ const appRoutes: Routes = [
   }
 )
 
-export class AppRoutingModule{
+export class AppRoutingModule {
 
 }
